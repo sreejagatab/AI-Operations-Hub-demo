@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Operations Hub | Document & Email Automation for Professional Services & Logistics</title>
+    <meta name="description" content="Cut admin time by 80%. On-premise AI automation for invoices, emails, and internal knowledge. No data leaves your systems.">
+    <style>
+        :root {
+            --primary: #1a1a2e;
+            --secondary: #16213e;
+            --accent: #0f4c75;
+            --highlight: #2563eb;
+            --light: #f0f4f8;
+            --white: #ffffff;
+            --text: #1f2937;
+            --text-light: #374151;
+            --text-muted: #6b7280;
+            --border: #d1d5db;
+            --success: #059669;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background: var(--white);
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Header */
+        header {
+            background: #1e3a5f;
+            padding: 16px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: var(--white);
+            font-size: 1.25rem;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .header-cta {
+            background: var(--highlight);
+            color: var(--white);
+            padding: 10px 24px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background 0.2s;
+        }
+
+        .header-cta:hover {
+            background: #2a6fa8;
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, #e8f4fc 0%, #d0e8f9 50%, #b8dcf5 100%);
+            color: #111827;
+            padding: 140px 0 80px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            max-width: 800px;
+            margin: 0 auto 24px;
+            line-height: 1.2;
+            color: #111827;
+        }
+
+        .hero .subheadline {
+            font-size: 1.25rem;
+            max-width: 600px;
+            margin: 0 auto;
+            color: #1f2937;
+            font-weight: 500;
+        }
+
+        /* Section styling */
+        section {
+            padding: 80px 0;
+        }
+
+        section:nth-child(even) {
+            background: var(--light);
+        }
+
+        .section-title {
+            font-size: 1.75rem;
+            font-weight: 600;
+            margin-bottom: 40px;
+            text-align: center;
+            color: var(--primary);
+        }
+
+        /* Who this is for */
+        .audience-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+        }
+
+        .audience-box {
+            background: var(--white);
+            padding: 32px;
+            border-radius: 8px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+
+        .audience-box h3 {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .audience-box.positive {
+            border-top: 4px solid var(--success);
+        }
+
+        .audience-box.positive h3 {
+            color: var(--success);
+        }
+
+        .audience-box.negative {
+            border-top: 4px solid #9ca3af;
+        }
+
+        .audience-box.negative h3 {
+            color: #4b5563;
+        }
+
+        .audience-box ul {
+            list-style: none;
+        }
+
+        .audience-box li {
+            padding: 12px 0;
+            padding-left: 28px;
+            position: relative;
+            border-bottom: 1px solid var(--border);
+            color: var(--text);
+        }
+
+        .audience-box li:last-child {
+            border-bottom: none;
+        }
+
+        .audience-box.positive li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--success);
+            font-weight: bold;
+        }
+
+        .audience-box.negative li::before {
+            content: "×";
+            position: absolute;
+            left: 0;
+            color: #999;
+            font-weight: bold;
+        }
+
+        /* How it works */
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+
+        .step {
+            text-align: center;
+            padding: 32px 24px;
+            background: var(--white);
+            border-radius: 8px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            border: 1px solid var(--border);
+        }
+
+        .step-number {
+            width: 48px;
+            height: 48px;
+            background: var(--highlight);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin: 0 auto 20px;
+        }
+
+        .step h3 {
+            font-size: 1.1rem;
+            margin-bottom: 12px;
+            color: var(--primary);
+        }
+
+        .step p {
+            color: var(--text);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .data-notice {
+            text-align: center;
+            margin-top: 48px;
+            padding: 24px;
+            background: var(--white);
+            border-left: 4px solid var(--success);
+            font-weight: 500;
+        }
+
+        /* Pricing */
+        .pricing-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+
+        .pricing-table th {
+            background: var(--primary);
+            color: var(--white);
+            padding: 20px 24px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .pricing-table td {
+            padding: 20px 24px;
+            border-bottom: 1px solid var(--border);
+            color: var(--text);
+        }
+
+        .pricing-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .pricing-table .bundle-name {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .pricing-table .price {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--highlight);
+        }
+
+        .pricing-features {
+            margin-top: 40px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            text-align: center;
+        }
+
+        .pricing-feature {
+            padding: 16px;
+            background: var(--white);
+            border-radius: 4px;
+            border: 1px solid var(--border);
+        }
+
+        .pricing-feature strong {
+            display: block;
+            color: var(--primary);
+            margin-bottom: 4px;
+        }
+
+        .pricing-feature span {
+            color: var(--text);
+        }
+
+        .annual-note {
+            text-align: center;
+            margin-top: 24px;
+            font-size: 1.1rem;
+            color: var(--success);
+            font-weight: 500;
+        }
+
+        /* Demo CTA */
+        .demo-section {
+            background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 50%, #93c5fd 100%);
+            color: #111827;
+            text-align: center;
+        }
+
+        .demo-section h2 {
+            font-size: 2rem;
+            margin-bottom: 16px;
+            color: #111827;
+        }
+
+        .demo-section p {
+            font-size: 1.1rem;
+            margin-bottom: 32px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            color: #1f2937;
+        }
+
+        .demo-section .subtext {
+            font-size: 0.95rem;
+            margin-bottom: 32px;
+            color: #374151;
+            font-weight: 500;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            background: #1e3a5f;
+            color: #ffffff;
+            padding: 16px 48px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            background: #0d47a1;
+        }
+
+        /* Trust section */
+        .trust-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+
+        .trust-table th {
+            background: var(--primary);
+            color: var(--white);
+            padding: 16px 24px;
+            text-align: left;
+            font-weight: 600;
+            width: 200px;
+        }
+
+        .trust-table td {
+            padding: 16px 24px;
+            border-bottom: 1px solid var(--border);
+            background: var(--white);
+            color: var(--text);
+        }
+
+        .trust-table tr:last-child td,
+        .trust-table tr:last-child th {
+            border-bottom: none;
+        }
+
+        .trust-table .concern {
+            background: #1e3a5f;
+            font-weight: 600;
+            color: var(--white);
+        }
+
+        .trust-statement {
+            text-align: center;
+            margin-top: 40px;
+            padding: 32px;
+            background: linear-gradient(135deg, #1e3a5f 0%, #0d47a1 100%);
+            color: var(--white);
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+        }
+
+        /* FAQ */
+        .faq-list {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: var(--white);
+            margin-bottom: 16px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            border: 1px solid var(--border);
+        }
+
+        .faq-question {
+            padding: 24px;
+            font-weight: 600;
+            color: var(--primary);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-question::after {
+            content: "+";
+            font-size: 1.5rem;
+            color: var(--highlight);
+        }
+
+        .faq-item.active .faq-question::after {
+            content: "−";
+        }
+
+        .faq-answer {
+            padding: 0 24px 24px;
+            color: var(--text);
+            display: none;
+            line-height: 1.7;
+        }
+
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+
+        /* Footer CTA */
+        .footer-cta {
+            background: linear-gradient(135deg, #e8f4fc 0%, #d0e8f9 100%);
+            color: #111827;
+            text-align: center;
+            padding: 60px 0;
+        }
+
+        .footer-cta h2 {
+            font-size: 1.75rem;
+            margin-bottom: 24px;
+            color: #111827;
+        }
+
+        .footer-cta .btn-primary {
+            margin-right: 16px;
+        }
+
+        .footer-cta .email-link {
+            color: #1e3a5f;
+            font-weight: 600;
+        }
+
+        .footer-cta .tagline {
+            margin-top: 40px;
+            color: #374151;
+            font-size: 0.9rem;
+        }
+
+        /* Site Footer */
+        .site-footer {
+            background: #0f172a;
+            color: #e2e8f0;
+            padding: 60px 0 0;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 40px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid #334155;
+        }
+
+        .footer-brand {
+            max-width: 280px;
+        }
+
+        .footer-logo {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .footer-description {
+            margin-top: 12px;
+            color: #94a3b8;
+            font-size: 0.95rem;
+        }
+
+        .footer-links-section {
+            display: flex;
+            gap: 60px;
+        }
+
+        .footer-column h4 {
+            color: #ffffff;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .footer-column a {
+            display: block;
+            color: #94a3b8;
+            text-decoration: none;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+
+        .footer-column a:hover {
+            color: #ffffff;
+        }
+
+        .footer-bottom {
+            padding: 24px 0;
+            text-align: center;
+        }
+
+        .footer-bottom p {
+            color: #64748b;
+            font-size: 0.875rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 1.75rem;
+            }
+
+            .audience-grid,
+            .steps {
+                grid-template-columns: 1fr;
+            }
+
+            .pricing-features {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .pricing-table {
+                font-size: 0.9rem;
+            }
+
+            .pricing-table th,
+            .pricing-table td {
+                padding: 12px 16px;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .footer-brand {
+                max-width: 100%;
+            }
+
+            .footer-links-section {
+                flex-direction: column;
+                gap: 32px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <a href="#" class="logo">AI Operations Hub</a>
+            <a href="demo.html" class="header-cta">Book Demo</a>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="container">
+            <h1>Your Team Spends 15+ Hours a Week on Documents and Emails That Software Should Handle</h1>
+            <p class="subheadline">Cut admin time by 80%. Keep every document, email, and policy answer inside your own walls.</p>
+        </div>
+    </section>
+
+    <!-- Who This Is For -->
+    <section id="audience">
+        <div class="container">
+            <h2 class="section-title">Who This Is For</h2>
+            <div class="audience-grid">
+                <div class="audience-box positive">
+                    <h3>This is for you if:</h3>
+                    <ul>
+                        <li>Your team manually enters data from invoices, BOLs, or contracts</li>
+                        <li>Client emails sit unanswered because nobody has time to draft proper responses</li>
+                        <li>Staff ask the same policy questions every week—and nobody knows where the answer lives</li>
+                        <li>You've avoided AI tools because you can't risk client data leaving your systems</li>
+                    </ul>
+                </div>
+                <div class="audience-box negative">
+                    <h3>This is not for you if:</h3>
+                    <ul>
+                        <li>You're looking for a chatbot to put on your website</li>
+                        <li>You need consumer-facing AI features</li>
+                        <li>You're comfortable with your data flowing through OpenAI or Google</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section id="how-it-works">
+        <div class="container">
+            <h2 class="section-title">How It Works</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Connect Your Document Flow</h3>
+                    <p>Upload invoices, contracts, delivery notes, or emails. Our system classifies, extracts key fields, and checks compliance—automatically.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Build Your Knowledge Base</h3>
+                    <p>Ingest your internal policies, procedures, and SOPs. Staff get instant, accurate answers with source citations. No more hunting through shared drives.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Automate the Repetitive Work</h3>
+                    <p>Email classification. Response drafting. Action item extraction. Document summarisation. The tasks that consume hours become minutes.</p>
+                </div>
+            </div>
+            <div class="data-notice">
+                Everything runs on your infrastructure. Your data never leaves your control.
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing -->
+    <section id="pricing">
+        <div class="container">
+            <h2 class="section-title">Industry Bundles</h2>
+            <table class="pricing-table">
+                <thead>
+                    <tr>
+                        <th>Bundle</th>
+                        <th>Best For</th>
+                        <th>What's Included</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="bundle-name">ClientEdge AI</td>
+                        <td>Law firms, consultancies, accountants</td>
+                        <td>Email automation + Document processing + Internal knowledge base</td>
+                        <td class="price">£449/month</td>
+                    </tr>
+                    <tr>
+                        <td class="bundle-name">FreightFlow AI</td>
+                        <td>Freight brokers, 3PLs, logistics operators</td>
+                        <td>BOL/invoice processing + Email triage + Compliance checking</td>
+                        <td class="price">£299/month</td>
+                    </tr>
+                    <tr>
+                        <td class="bundle-name">BusinessCore AI</td>
+                        <td>SMEs needing document automation</td>
+                        <td>Email automation + Document processing</td>
+                        <td class="price">£149/month</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="pricing-features">
+                <div class="pricing-feature">
+                    <strong>Unlimited Users</strong>
+                    <span>No per-seat charges</span>
+                </div>
+                <div class="pricing-feature">
+                    <strong>On-Premise</strong>
+                    <span>Your infrastructure</span>
+                </div>
+                <div class="pricing-feature">
+                    <strong>99.5% Uptime</strong>
+                    <span>SLA guaranteed</span>
+                </div>
+                <div class="pricing-feature">
+                    <strong>Setup Support</strong>
+                    <span>Included</span>
+                </div>
+            </div>
+            <p class="annual-note">Annual contracts: 2 months free.</p>
+        </div>
+    </section>
+
+    <!-- Demo CTA -->
+    <section id="demo" class="demo-section">
+        <div class="container">
+            <h2>See It Working With Your Documents</h2>
+            <p>Book a 20-minute demo. We'll process your actual documents—invoices, emails, contracts—and show you exactly what automation looks like for your workflow.</p>
+            <p class="subtext">No sales pitch. No follow-up sequence. Just your documents, processed in real time.</p>
+            <a href="demo.html" class="btn-primary">Book Demo</a>
+        </div>
+    </section>
+
+    <!-- Trust & Safety -->
+    <section id="trust">
+        <div class="container">
+            <h2 class="section-title">Your Data Stays Yours</h2>
+            <p style="text-align: center; margin-bottom: 40px; color: var(--text);">We built this for firms that can't compromise on confidentiality.</p>
+            <table class="trust-table">
+                <tr>
+                    <th class="concern">Data Residency</th>
+                    <td>Runs entirely on your infrastructure. Nothing transmitted externally.</td>
+                </tr>
+                <tr>
+                    <th class="concern">Third-Party AI</th>
+                    <td>No OpenAI. No Google. No Anthropic API calls. Open-source models only.</td>
+                </tr>
+                <tr>
+                    <th class="concern">Client Confidentiality</th>
+                    <td>Your documents are never used to train models. Ever.</td>
+                </tr>
+                <tr>
+                    <th class="concern">Audit Requirements</th>
+                    <td>Full audit trails on every operation. Enterprise tier includes compliance logging.</td>
+                </tr>
+                <tr>
+                    <th class="concern">Multi-Tenant Isolation</th>
+                    <td>Each client's data is completely separated. No cross-contamination.</td>
+                </tr>
+            </table>
+            <div class="trust-statement">
+                We don't see your data. We can't see your data. That's the point.
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq">
+        <div class="container">
+            <h2 class="section-title">Common Questions</h2>
+            <div class="faq-list">
+                <div class="faq-item active">
+                    <div class="faq-question">How long does setup take?</div>
+                    <div class="faq-answer">Most firms are processing documents within 48 hours. Self-serve signup takes 5 minutes. First automation typically runs on day one.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">What documents can it process?</div>
+                    <div class="faq-answer">Invoices, contracts, delivery notes, bills of lading, purchase orders, permits, quotes, and receipts. Email classification works with any business communication.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Do we need technical staff to run this?</div>
+                    <div class="faq-answer">No. The system runs in Docker containers with a simple web interface. If you can use email, you can use this.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">What happens if the AI gets something wrong?</div>
+                    <div class="faq-answer">Every output includes a confidence score. Low-confidence results are flagged for human review. You set the threshold—we recommend 0.7 for most use cases.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Can we try it before committing?</div>
+                    <div class="faq-answer">Yes. Demo mode lets you test with your real documents. No credit card required. No time-limited trial pressure.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer CTA -->
+    <section class="footer-cta">
+        <div class="container">
+            <h2>Ready to Stop Doing Work That Software Should Handle?</h2>
+            <a href="demo.html" class="btn-primary">Book a Demo</a>
+            <span style="margin: 0 16px; color: #374151;">or</span>
+            <a href="mailto:info@jagatab.uk" class="email-link">info@jagatab.uk</a>
+            <p class="tagline">AI Operations Hub is built for firms that value their time and their clients' privacy.</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="footer-logo">AI Operations Hub</span>
+                    <p class="footer-description">Document automation that keeps your data private.</p>
+                </div>
+                <div class="footer-links-section">
+                    <div class="footer-column">
+                        <h4>Product</h4>
+                        <a href="#how-it-works">How It Works</a>
+                        <a href="#pricing">Pricing</a>
+                        <a href="demo.html">Book Demo</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Company</h4>
+                        <a href="mailto:info@jagatab.uk">Contact</a>
+                        <a href="#trust">Security</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Legal</h4>
+                        <a href="terms.html">Terms of Service</a>
+                        <a href="privacy.html">Privacy Policy</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 AI Operations Hub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // FAQ Accordion
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const item = question.parentElement;
+                const wasActive = item.classList.contains('active');
+
+                // Close all items
+                document.querySelectorAll('.faq-item').forEach(faq => {
+                    faq.classList.remove('active');
+                });
+
+                // Open clicked item if it wasn't active
+                if (!wasActive) {
+                    item.classList.add('active');
+                }
+            });
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

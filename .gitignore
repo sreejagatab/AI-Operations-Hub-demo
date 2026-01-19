@@ -1,0 +1,28 @@
+# Ignore service directories (separate repos)
+A-AI-ADMIN-ASSISTANT/
+B-AI-DOCUMENT-PROCESSOR/
+C-AI-INTERNAL-KNOWLEDGE-BOT/
+D-SaaS-ORCHESTRATOR-PLATFORM/
+
+# Internal documents (not for public)
+SALES_SCRIPT.md
+EMAIL_TEMPLATES.md
+LINKEDIN_TEMPLATES.md
+CUSTOM_WORK_POLICY.md
+CLIENT_ONBOARDING_CHECKLIST.md
+30_DAY_OUTREACH_PLAN.md
+todos*.txt
+
+# Python
+__pycache__/
+*.py[cod]
+venv/
+.env
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
