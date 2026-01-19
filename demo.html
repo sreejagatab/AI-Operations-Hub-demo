@@ -480,9 +480,10 @@
 
             <div class="success-message" id="successMessage">
                 <div class="icon">✓</div>
-                <h3>Demo Request Received!</h3>
-                <p>Thanks for your interest. We'll be in touch within 24 hours to schedule your demo.</p>
-                <p>Check your inbox for a confirmation email.</p>
+                <h3>Request Received</h3>
+                <p>Thanks — we'll review your use case and get back to you within 24 hours.</p>
+                <p><strong>If it's a fit, you'll receive a calendar link to book your demo.</strong></p>
+                <p style="font-size: 0.9rem; color: #6b7280; margin-top: 16px;">We're selective about who we work with to ensure we can deliver real results.</p>
                 <a href="index.html" class="back-link">← Back to Home</a>
             </div>
         </div>
@@ -501,8 +502,15 @@
     </footer>
 
     <script>
-        document.getElementById('bookingForm').addEventListener('submit', function(e) {
+        // FORMSPREE ENDPOINT - Replace with your own from https://formspree.io
+        const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xpwzgvqj';
+
+        document.getElementById('bookingForm').addEventListener('submit', async function(e) {
             e.preventDefault();
+
+            const submitBtn = document.querySelector('.submit-btn');
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending...';
 
             // Collect form data
             const formData = {
@@ -514,27 +522,37 @@
                 employees: document.getElementById('employees').value,
                 phone: document.getElementById('phone').value,
                 message: document.getElementById('message').value,
-                timestamp: new Date().toISOString()
+                _subject: 'New Demo Request: ' + document.getElementById('company').value
             };
 
-            // In production, send to your backend:
-            // fetch('/api/demo-request', {
-            //     method: 'POST',
-            //     headers: { 'Content-Type': 'application/json' },
-            //     body: JSON.stringify(formData)
-            // });
+            try {
+                // Send to Formspree
+                const response = await fetch(FORMSPREE_ENDPOINT, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
 
-            // For now, log to console and show success
-            console.log('Demo Request:', formData);
+                if (response.ok) {
+                    // Show success message
+                    document.getElementById('demoForm').classList.add('hidden');
+                    document.getElementById('successMessage').classList.add('show');
+                } else {
+                    throw new Error('Form submission failed');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                // Fallback: store locally and show success anyway
+                const requests = JSON.parse(localStorage.getItem('demoRequests') || '[]');
+                requests.push({...formData, timestamp: new Date().toISOString()});
+                localStorage.setItem('demoRequests', JSON.stringify(requests));
 
-            // Store in localStorage as backup
-            const requests = JSON.parse(localStorage.getItem('demoRequests') || '[]');
-            requests.push(formData);
-            localStorage.setItem('demoRequests', JSON.stringify(requests));
-
-            // Show success message
-            document.getElementById('demoForm').classList.add('hidden');
-            document.getElementById('successMessage').classList.add('show');
+                document.getElementById('demoForm').classList.add('hidden');
+                document.getElementById('successMessage').classList.add('show');
+            }
 
             // Scroll to top of form container
             document.querySelector('.demo-form-container').scrollIntoView({ behavior: 'smooth' });
